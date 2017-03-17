@@ -6,21 +6,23 @@ public class Analisis {
 	
 	private List<String> paths;
 	private Administrador admin;
+	private Encuesta encuesta;
 	
-	public Analisis(List<String> pathsInput, Administrador admin){
+	public Analisis(List<String> pathsInput, Administrador admin, Encuesta encuesta){
 		paths = new ArrayList<String>();
 		for(String s: pathsInput){
 			paths.add(s); //Strings are imutable so no problem			
 		}
 		
-		this.admin = admin;
+		this.admin = admin; //Do I need to store admin?
+		this.encuesta = encuesta;
 	}
 	
 	public List<Respuesta_Encuesta> importResp(){
 		
 	}
 	
-	public Resultados k_means(List<Respuesta_Encuesta> listToAnalyse, int k, int sizeVector, double thresholdDist){
+	public Resultados k_means(List<Respuesta_Encuesta> listToAnalyse, int k, double thresholdDist){
 		
 		//variable listToAnalyse is an array containing the results we want to analyse
 		//variable k is the number of centroids we want
@@ -31,8 +33,8 @@ public class Analisis {
 		//generar los seeds random?
 		Respuesta_Encuesta seed = new Respuesta_Encuesta();
 		for(int i = 0; i < k; i++){
-			for(int j = 0; j < sizeVector; j++){
-				//generate random answer "random" to the question
+			for(int j = 0; j < encuesta.size() ; j++){
+				//generate random answer "random" to the question ecuesta.get(j).type()
 				Respuesta_Pregunta rp = new Respuesta_Pregunta(random);
 				seed.add(rp);
 			}			
@@ -45,7 +47,8 @@ public class Analisis {
 			
 			for(int i = 0; i < k; i++){
 				double distance = 0;
-				for(int index = 0; index < sizeVector; index++){
+				for(int index = 0; index < encuesta.size(); index++){
+					//Switch encuesta.get(index).type case ...
 					//Compute distance between ra.get(index) and seeds.get(index)
 					//Increment distance
 				}
