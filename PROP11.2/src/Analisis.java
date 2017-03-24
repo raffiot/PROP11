@@ -4,25 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 public class Analisis {
 	
-	private List<String> paths;
+	private int id;
+	private int k;
+	private double threshold;
 	private Administrador admin;
+	private List<RespuestaEncuesta> respEncuesta;
 	private Encuesta encuesta;
 	
-	public Analisis(List<String> pathsInput, Administrador admin, Encuesta encuesta){
-		paths = new ArrayList<String>();
-		for(String s: pathsInput){
-			paths.add(s); //Strings are imutable so no problem			
+	public Analisis(int id, int k, double threshold, Administrador admin, List<RespuestaEncuesta> respEncuesta){
+		this.id = id;
+		this.k = k;
+		this.threshold = threshold;
+		this.admin = admin;
+		this.respEncuesta = new ArrayList<RespuestaEncuesta>();
+		for(RespuestaEncuesta r : respEncuesta){
+			this.respEncuesta.add(r);
 		}
-		
-		this.admin = admin; //Do I need to store admin?
-		this.encuesta = encuesta;
+		encuesta = respEncuesta.get(0).getEncuesta();
 	}
 	
-	public List<Respuesta_Encuesta> importResp(){
-		
-	}
-	
-	public Resultados k_means(List<Respuesta_Encuesta> listToAnalyse, int k, double thresholdDist){
+	public Resultado k_means(){
 		
 		//variable listToAnalyse is an array containing the results we want to analyse
 		//variable k is the number of centroids we want
